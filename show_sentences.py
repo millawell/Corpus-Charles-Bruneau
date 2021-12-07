@@ -1,11 +1,14 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import pickle5 as pickle
 
 @st.cache()
 def load_data():
-    data = pd.read_pickle("outdir/merged.pkl")
-    data = data.dropna()
+    with open("outdir/merged.pkl", "rb") as fh:
+        data = pickle.load(fh)
+        # data = pd.read_pickle("outdir/merged.pkl")
+        data = data.dropna()
     return data
 
 data = load_data()
